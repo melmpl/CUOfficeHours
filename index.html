@@ -1,0 +1,169 @@
+<html>
+
+<head>
+<title> Office Hours </title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/preHealthAdvisor.css">
+
+<script type="text/javascript">
+
+function searchTable() {
+  var input = document.getElementById("myInput");
+  var filter = input.value.toUpperCase();
+  var table = document.getElementById("myTable");
+  var tr = table.getElementsByTagName("tr");
+
+  // A loop that will look through the table and hide those that don't match query
+  for (i = 0; i < tr.length; i++) {
+    var firstCol = tr[i].getElementsByTagName("td")[0];
+    var secondCol = tr[i].getElementsByTagName("td")[1];
+    var thirdCol =tr[i].getElementsByTagName("td")[2];
+
+    if (firstCol || secondCol || thirdCol) {
+      if (firstCol.innerHTML.toUpperCase().indexOf(filter) > -1 || secondCol.innerHTML.toUpperCase().indexOf(filter) > -1 || thirdCol.innerHTML.toUpperCase().indexOf(filter) > -1 ) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+</script>
+<head>
+<body>
+<h1>Office Hour Look Up</h1>
+<hr>
+
+<input type="text" id="myInput" onkeyup="searchTable()" placeholder="Search by Professor, Department, or Office">
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width:20%;">Professor</th>
+    <th style="width:20%;">Department</th>
+    <th style="width:20%;">Office</th>
+  </tr>
+  <tr>
+    <td>Journalism</td>
+    <td>Dr. Carol Zuegner </td>
+    <td>HCCA 210 </td>
+  </tr>
+  <tr>
+    <td>Journalism</td>
+    <td>Dr. Jeffrey Maiciejewski  </td>
+    <td>HCCA 210A </td>
+  </tr>
+  <tr>
+    <td>Journalism </td>
+    <td>Dr. Rich Johnson</td>
+    <td>HCCA 204</td>
+  </tr>
+  <tr>
+    <td>Journalism</td>
+    <td>Dr. Peggy Rupprecht</td>
+    <td>HCCA 211 </td>
+  </tr>
+  <tr>
+    <td>Graphic Design and Media</td>
+    <td>M.F.A. Tim Guthrie</td>
+    <td>HCCA 203 </td>
+  </tr>
+  <tr>
+    <td>Graphic Design and Media</td>
+    <td>M.F.A. Betni Kalk</td>
+    <td>HCCA 203 </td>
+  </tr>
+  <tr>
+    <td>Graphic Design and Media</td>
+    <td>M.F.A. Alex Myers</td>
+    <td>HCCA 402 </td>
+  </tr>
+  <tr>
+    <td>Computer Science and Informatics </td>
+    <td>Dr. Dave Reed</td>
+    <td>HCCA 203D </td>
+  </tr>
+  <tr>
+    <td>Computer Science and Informatics </td>
+    <td>Dr. Brian Kokensparger</td>
+    <td>HCCA 212</td>
+  </tr>
+  <tr>
+    <td>Computer Science and Informatics </td>
+    <td>Dr. Catie Baker</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Part-Time Instructor</td>
+    <td>Angela Glover</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Part-Time Instructor</td>
+    <td>Chritine Mori</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Part-Time Instructor</td>
+    <td>Marc Longbrake</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Part-Time Instructor</td>
+    <td>Chris Machain</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Part-Time Instructor</td>
+    <td>Joe Pankowski</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Part-Time Instructor</td>
+    <td>Angie Seykora</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Part-Time Instructor</td>
+    <td>Christian Burk</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Administrative Assistant</td>
+    <td>Angela Batson</td>
+    <td>--</td>
+  </tr>
+</table>
+
+
+</body>
+</html>
+
+
+<?php
+  include("Functions551.inc");
+  $query = mysql_query("SELECT * FROM Professors");
+?>
+
+         <table>
+            <tr>
+                <td>Professor</td>
+                <td>Department</td>
+                <td>Office</td>
+                <td>Hours</td>
+            </tr>
+
+            <?php
+               while ($row = mysql_fetch_array($query)) {
+?>
+                  <tr>
+                <td><?php echo $row['Prof']; ?></td>
+                <td><?php echo $row['Department']; ?></td>
+                <td><?php echo $row['Office']; ?></td>
+                <td><?php echo $row['MonHrs']; ?></td>
+            </tr>
+    <?php
+               }
+
+            ?>
+        </table>
